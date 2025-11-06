@@ -21,6 +21,8 @@ func (p *RequestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		if r.Header.Get("Content-Type") != "text/plain" {
 			w.WriteHeader(http.StatusBadRequest)
+
+			return
 		}
 
 		bodyBytes, err := io.ReadAll(r.Body)
