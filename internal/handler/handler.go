@@ -11,9 +11,9 @@ type RequestHandler struct {
 	shortenerService service.IShortenerService
 }
 
-func NewHandler() *RequestHandler {
+func NewHandler(shortenerService service.IShortenerService) *RequestHandler {
 	return &RequestHandler{
-		shortenerService: service.NewShortenerService(),
+		shortenerService: shortenerService,
 	}
 }
 
