@@ -7,13 +7,16 @@ import (
 	"strings"
 )
 
+// Глобальный сервис
+var defaultService = service.NewShortenerService()
+
 type RequestHandler struct {
 	shortenerService service.IShortenerService
 }
 
 func NewHandler(shortenerService service.IShortenerService) *RequestHandler {
 	return &RequestHandler{
-		shortenerService: shortenerService,
+		shortenerService: defaultService,
 	}
 }
 
