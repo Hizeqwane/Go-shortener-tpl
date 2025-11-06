@@ -34,7 +34,7 @@ func (service *shortenerService) GetShortUri(longUri string) string {
 }
 
 func (service *shortenerService) TryGetLongUri(shortUri string) (string, bool) {
-	i, ok := service.longMap[shortUri]
+	i, ok := service.shortMap[shortUri]
 
 	return i, ok
 }
