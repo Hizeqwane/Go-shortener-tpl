@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"fmt"
 	"github.com/Hizeqwane/Go-shortener-tpl/internal/service"
 	"io"
 	"net/http"
@@ -42,7 +43,16 @@ func (p *RequestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 			longUri = "http://" + longUri
 		}
 
-		shortUri := p.shortenerService.GetShortUri(longUri)
+		// после генерации shortUri:
+		shortId := p.shortenerService.GetShortUri(longUri)
+
+		// сформировать абсолютный URL для ответа
+		scheme := "http"
+		if r.TLS != nil {
+			scheme = "https"
+		}
+		// r.Host содержит host:port, например "localhost:8080"
+		shortUri := fmt.Sprintf("%s://%s/%s", scheme, r.Host, shortId)
 
 		w.Header().Set("Content-Type", "text/plain")
 		w.WriteHeader(http.StatusCreated)
