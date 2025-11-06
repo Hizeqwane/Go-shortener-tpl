@@ -1,3 +1,3 @@
 module github.com/Hizeqwane/Go-shortener-tpl
 
-go 1.25.0
+go 1.24.10
