@@ -34,6 +34,11 @@ func (p *RequestHandler) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 
 		longUri := string(bodyBytes)
 
+		// Если нет протокола, добавляем http://
+		if !strings.HasPrefix(longUri, "http://") && !strings.HasPrefix(longUri, "https://") {
+			longUri = "http://" + longUri
+		}
+
 		shortUri := p.shortenerService.GetShortUri(longUri)
 
 		w.Header().Set("Content-Type", "text/plain")
